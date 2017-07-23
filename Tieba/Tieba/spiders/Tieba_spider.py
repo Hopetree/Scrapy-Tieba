@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# 导入配置信息
+from scrapy.conf import settings
 from Tieba.items import TiebaItem
 import scrapy
 import re
@@ -7,13 +9,15 @@ import re
 class tieba_spider(scrapy.Spider):
     name = "Tieba"
     allowed_domains = ['tieba.baidu.com']
-    start_urls = ['http://tieba.baidu.com/f?kw=%E6%B7%B1%E5%9C%B3&ie=utf-8&pn=0']
+    # 起始链接从配置读取
+    start_urls = [settings['BASE_URL']]
 
     def parse(self, response):
-        base_url = 'http://tieba.baidu.com/f?kw=%E6%B7%B1%E5%9C%B3&ie=utf-8&pn={}'
-        pagenum = 100
+        base_url = '{}&pn={}'
+        # 总页码数从配置获取
+        pagenum = settings['TOTAL_PAGE']
         for page in range(pagenum):
-            the_url = base_url.format(page * 50)
+            the_url = base_url.format(settings['BASE_URL'],page * 50)
             yield scrapy.Request(the_url, callback=self.parse_get_urls)
 
     # 获取一页的所有帖子

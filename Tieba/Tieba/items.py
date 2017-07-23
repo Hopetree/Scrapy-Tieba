@@ -41,7 +41,7 @@ class TiebaItem(scrapy.Item):
     comment_num = scrapy.Field()
     # 是否吧务15
     is_bawu = scrapy.Field()
-    # 帖子链接
+    # 帖子链接16
     tie_link = scrapy.Field()
 
 

@@ -22,7 +22,7 @@ NEWSPIDER_MODULE = 'Tieba.spiders'
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
@@ -64,9 +64,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'Tieba.pipelines.TiebaPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'Tieba.pipelines.TiebaPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +88,18 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# MYSQL数据库连接配置
+MYSQL_HOST = "localhost"
+MYSQL_PORT = 3306
+MYSQL_USER = 'root'
+MYSQL_PW = 'python'
+MYSQL_DB = 'tieba'
+MYSQL_CHARSET = 'utf8mb4'
+# 表格名称
+MYSQL_TABLE = 'sanhe'
+
+# 爬虫开始链接和总页码数
+# 格式统一为这种结构http://tieba.baidu.com/f?kw=%E9%BE%99%E5%8D%8E&ie=utf-8
+BASE_URL = 'http://tieba.baidu.com/f?kw=%E9%BE%99%E5%8D%8E&ie=utf-8'
+TOTAL_PAGE = 100
