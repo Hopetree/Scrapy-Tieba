@@ -55,4 +55,4 @@ TOTAL_PAGE = 100
         bar.render(r"pic\等级分布条形图.html")
         print('成功输出Bar测试网页')
 ```
-![baidu](http://www.baidu.com/img/bdlogo.gif "百度logo")  
+![1](https://github.com/Hopetree/Scrapy-Tieba/blob/master/pic/%E7%AD%89%E7%BA%A7%E5%88%86%E5%B8%83%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
