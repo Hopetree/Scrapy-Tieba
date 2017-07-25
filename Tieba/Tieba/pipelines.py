@@ -6,7 +6,10 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from scrapy.conf import settings
+from scrapy import log
+from scrapy.exceptions import DropItem
 import pymysql
+import pymongo
 
 class TiebaPipeline(object):
     def __init__(self):
@@ -35,5 +38,23 @@ class TiebaPipeline(object):
         except Exception as e:
             print("保存信息失败，原因是{}".format(e))
             self.conn.rollback()
+
+        return item
+
+class TiebaMongoDB(object):
+    def __init__(self):
+        self.coon = pymongo.MongoClient(host=settings['MONGODB_HOST'],port=settings['MONGODB_PORT'])
+        self.db = self.coon[settings['MONGODB_DBNAME']]
+        self.coll = self.db[settings['MONGODB_COLLECTIONNAME']]
+
+    def process_item(self,item,spider):
+        valid = True
+        for data in item:
+            if not data:
+                valid = False
+                raise DropItem('Missing {} !'.format(data))
+        if valid:
+            self.coll.insert(dict(item))
+            log.msg('item added to mongodb database !',level=log.DEBUG,spider=spider)
 
         return item

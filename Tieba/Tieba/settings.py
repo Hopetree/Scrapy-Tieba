@@ -64,8 +64,10 @@ CONCURRENT_REQUESTS = 32
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+# 第一个是开启MySQL的存储，第二个是开启mongodb，一次存储选择一种即可
 ITEM_PIPELINES = {
-   'Tieba.pipelines.TiebaPipeline': 300,
+   'Tieba.pipelines.TiebaPipeline': None,
+   'Tieba.pipelines.TiebaMongoDB':300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -89,17 +91,25 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-# MYSQL数据库连接配置
+# MYSQL数据库连接配置，一般不改动
 MYSQL_HOST = "localhost"
 MYSQL_PORT = 3306
 MYSQL_USER = 'root'
 MYSQL_PW = 'python'
-MYSQL_DB = 'tieba'
 MYSQL_CHARSET = 'utf8mb4'
-# 表格名称
+# 数据库和数据表名称，需要按需改动
+MYSQL_DB = 'tieba'
 MYSQL_TABLE = 'sanhe'
+
+# mongodb的配置，一般不改动
+MONGODB_HOST = 'localhost'
+MONGODB_PORT = 27017
+# 下面两项是需要自己改动的
+MONGODB_DBNAME = 'spiderdata'
+MONGODB_COLLECTIONNAME = 'shenzhenba'
+
 
 # 爬虫开始链接和总页码数
 # 格式统一为这种结构http://tieba.baidu.com/f?kw=%E9%BE%99%E5%8D%8E&ie=utf-8
-BASE_URL = 'http://tieba.baidu.com/f?kw=%E9%BE%99%E5%8D%8E&ie=utf-8'
-TOTAL_PAGE = 100
+BASE_URL = 'http://tieba.baidu.com/f?kw=%E6%B7%B1%E5%9C%B3&ie=utf-8'
+TOTAL_PAGE = 200
